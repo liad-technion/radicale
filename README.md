@@ -8,14 +8,23 @@
 
 ## Quick start
 
+**1. Set the admin password.** On first run, the entrypoint reads this file and creates the `admin` user from it.
+
 ```bash
 echo "your_password" > secrets/radicale_password.txt
-docker compose up -d
 ```
 
-Open http://localhost:8000 — log in as `admin` with the password above.
+**2. Start the server.** Pulls the image from Docker Hub and runs it in the background. Defaults to the `stable` tag; set `RADICALE_TAG=dev` to use the dev image instead.
 
-To use the dev image: `RADICALE_TAG=dev docker compose up -d`
+```bash
+docker compose up -d
+# or, for the dev image:
+RADICALE_TAG=dev docker compose up -d
+```
+
+**3. Open the app.** Radicale is now listening on port 8000.
+
+Go to http://localhost:8000 and log in as `admin` with the password from step 1.
 
 ## Customizing
 
