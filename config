@@ -1,0 +1,13 @@
+[server]
+hosts = 0.0.0.0:8000
+
+[auth]
+type = htpasswd
+htpasswd_filename = /data/users
+htpasswd_encryption = plain
+
+[storage]
+filesystem_folder = /data/collections
+
+[logging]
+level = info

@@ -1,0 +1,22 @@
+services:
+  radicale:
+    image: devtwist/radicale:${RADICALE_TAG:-stable}
+    container_name: radicale
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      RADICALE_USERNAME: admin
+    secrets:
+      - radicale_password
+    volumes:
+      - ./config:/etc/radicale/config:ro
+      - radicale-data:/data
+
+secrets:
+  radicale_password:
+    file: ./secrets/radicale_password.txt
+
+volumes:
+  radicale-data:
+    name: radicale-data

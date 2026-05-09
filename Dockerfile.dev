@@ -1,0 +1,17 @@
+FROM python:3.13-alpine
+
+RUN pip install --no-cache-dir gunicorn https://github.com/Kozea/Radicale/archive/master.tar.gz && \
+    adduser -D -u 2999 radicale && \
+    mkdir -p /data && \
+    chown radicale:radicale /data
+
+USER radicale
+EXPOSE 8000
+
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["gunicorn", \
+     "--bind", "0.0.0.0:8000", \
+     "--env", "RADICALE_CONFIG=/etc/radicale/config", \
+     "--workers", "2", \
+     "radicale"]
